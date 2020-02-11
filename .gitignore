@@ -1,0 +1,43 @@
+.DS_Store
+
+*.rbc
+.byebug_history
+capybara-*.html
+.rspec
+/log
+/tmp
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/public/system
+/coverage/
+/spec/tmp
+/public/assets
+**.orig
+rerun.txt
+pickle-email-*.html
+
+# TODO Comment out these rules if you are OK with secrets being uploaded to the repo
+config/initializers/secret_token.rb
+
+## Environment normalization:
+/.bundle
+/vendor/bundle
+/vendor/assets/bower_components
+node_modules
+
+# Ignore application configuration
+/config/application.yml
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+Capfile
+Gemfile2.lock
+aws_assets/
+config/deploy.rb
+config/deploy/
+config/production.log
+dump.sql
+todo-list

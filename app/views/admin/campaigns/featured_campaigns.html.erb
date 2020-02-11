@@ -1,0 +1,45 @@
+<div id="content" class="content">
+  <ol class="breadcrumb pull-right">
+    <li><a href="javascript:;">Home</a></li>
+    <li><a href="javascript:;">Campaigns</a></li>
+    <li class="active">Featured</li>
+  </ol>
+  <h1 class="page-header">Featured Campaigns</h1>
+  <div id="gallery" class="gallery isotope" style="position: relative; overflow: hidden; height: 1047px;">
+    <% @campaigns.each do |campaign| %>
+    <div class="image <%= campaign.closed_at.present? ? 'closed' : campaign.status %> isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1); opacity: 1;">
+      <div class="image-inner">
+        <a href="<%= admin_campaign_path(campaign) %>" data-lightbox="<%= campaign.closed_at.present? ? 'closed' : campaign.status %>">
+          <img src="<%= campaign.avatar %>" alt="">
+        </a>
+        <p class="image-caption <%= campaign.closed_at.present? ? 'closed' : campaign.status %>">
+          <% if campaign.closed_at.present? %>
+            Closed
+          <% else %>
+            <%= campaign.status.blank? ? 'No Status' : campaign.status.capitalize %>
+          <% end %>
+        </p>
+      </div>
+      <div class="image-info">
+        <h5 class="title"><%= link_to campaign.name, admin_campaign_path(campaign) %></h5>
+        <div class="pull-right">
+          <small>by</small>
+          <% if !campaign.user.blank? %>
+            <a href="javascript:;"><%= campaign.user.email.split("@")[0] %></a>
+          <% else %>
+            <a href="javascript:;">Unknown</a>
+          <% end %>
+        </div>
+        <div class="rating">
+          <%= link_to mark_as_featured_admin_campaign_path(campaign), remote: :true, id: "featured_campaign_#{campaign.id}" do %>
+            <%= fa_icon "#{campaign.is_featured? ? 'heart' : 'heart-o' }" %>
+          <% end %>
+        </div>
+        <div class="desc">
+          <%= raw(campaign.description) %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

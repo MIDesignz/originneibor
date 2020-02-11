@@ -1,0 +1,144 @@
+<div style="margin-top: 20px;">
+  <% if @campaign.closed_at.present? %>
+    <div class="alert alert-success">This campaign closed <%= time_ago_in_words(@campaign.closed_at) %> ago.</div>
+  <% end %>
+  
+  <section class="">
+    <div class="container">
+      <div class="row singleProduct">
+        <div class="col-xs-12">
+          <% if current_user && current_user.campaigns.include?(@campaign) && @campaign.closed_at.nil? %>
+          <% if @campaign.pending? %>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="alert alert-warning">
+                  Your campaign is under approval. Please wait.
+                </p>
+              </div>
+            </div>
+          <% elsif @campaign.rejected? %>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="alert alert-warning">
+                  Your campaign has been rejected by admin! Please edit and resubmit the campaign for approval.
+                </p>
+                <div class="col-md-3">
+                  <%= link_to "Submit For Approval", resubmit_for_approval_campaign_path(@campaign), class: "btn btn-primary btn-block" if @campaign.rejected? %>
+                </div>
+
+                <div class="col-md-3">
+                  <%= link_to "Edit Campaign", edit_campaign_path(@campaign), class: "btn btn-primary btn-block" %>
+                </div>
+                      
+              </div>
+            </div>
+          <% else %>
+            <div class="row">
+              <p class="alert alert-success">
+                Congratulations! Your campaign is active now.
+              </p>
+              <% if @campaign.rejected? %>
+              <div class="col-md-6">
+                <%= link_to "Edit Campaign", edit_campaign_path(@campaign), class: "btn btn-primary btn-block" %>
+              </div>
+              <% end %>
+              <% if @campaign.active? %>
+              <div class="col-md-6">
+                <%= link_to "Close Campaign", close_campaign_path(@campaign), class: "btn btn-warning btn-block" %>
+              </div>
+              <% end %>
+            </div>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="media">
+            <div class="media-left" style="margin-top: 20px; margin-bottom: 20px;">
+              <%= image_tag @campaign.avatar.url, style: "width: 100%;" %>
+            </div>
+          </div>
+        </div>
+        <% if @campaign.volunteers_required? %>
+          <%= render 'map',margin_top: "margin-top: 20px;" %>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="media-body">
+            <h1><%= @campaign.name %></h1>
+            <p><%= raw(@campaign.description) %></p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="btn-area">
+                  <% if current_user.present? %>
+                    <% if @campaign.closed_at.nil? %>
+                      <%= simple_form_for Contribution.new, url: "/campaigns/#{@campaign.id}/contributions", method: :post do |f| %>
+                        <%= f.input :donation_type, as: :select, label: "Contribution Type", collection: [['Volunteer Time (in hours)', 0], ['Donate (in USD)', 1]], include_blank: false %>
+                        <%= f.input :donation_amount, label: "Amount" %>
+                        <%= f.submit "Submit Donation", class: "btn btn-primary", style: "padding: 10px; margin-bottom: 20px;" %>
+                      <% end %>
+                    <% else %>
+                      <h4>This campaign has ended. No further donations are being accepted.</h4>
+                    <% end %>
+                  <% else %>
+                    <h4>You must log in to submit a donation</h4>
+                    <%= link_to "Sign In", "/users/sign_in", class: "btn btn-primary btn-block" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="tabArea pull-center">
+              <div class="tab-content">
+                <div id="details" class="tab-pane active">
+                  <h3><%= @campaign.hours_donated %> Hours Volunteered.</h3>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 50px;">
+              <p style="font-size: 18px;">Share Campaign</p>
+              <%= social_share_button_tag(@campaign.name, :url => campaign_url(@campaign), :image => @campaign.avatar.url, desc: @campaign.description, via: "www.unitedneighbor.org") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <% if params[:fb_share] == "true" %>
+    <% @last_contribution = Contribution.where(user_id: current_user.id, campaign_id: @campaign.id).last %>
+    <div class="modal fade" id="fbShare" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="share-content text-center" style="padding: 50px;">
+              <h4 style="font-size: 20px; font-weight: 500;">Let your friends and relatives knows about you <strong> <%= @last_contribution.contribution_text %> </strong> for <strong> <%= @campaign.name %></strong></h4>
+                <%= social_share_button_tag(@campaign.name, :url => "http://unitedneighbor.org", :image => @campaign.avatar.url, desc: "The summary of page", via: "www.unitedneighbor.org", :allow_sites => %w(facebook)) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render 'contributions/contributions', contributions: @campaign.contributions, total_hours: "", title: "Contributions" %>
+</div>
+<style type="text/css">
+  .singleProduct .media .media-body {
+    display: block;
+  }
+  .social-share-button .ssb-icon {
+    background-size: 30px 30px;
+    height: 30px;
+    width: 30px;
+  }
+</style>
+<script type="text/javascript">
+  $(window).load(function(){        
+    <% if params['fb_share'] == "true" %>
+      $('#fbShare').modal('show');
+    <% end %>
+  }); 
+</script>

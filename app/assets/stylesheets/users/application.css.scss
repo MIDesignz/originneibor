@@ -1,0 +1,64 @@
+/*
+ *= require_self
+ *= require users/bootstrap.min
+ *= require users/jquery-ui
+ *= require font-awesome
+ *= require users/select_option1
+ *= require users/settings
+ *= require users/owl.carousel
+ *= require users/style
+ *= require users/default
+ *= require users/home_page
+ *= require social-share-button
+ *= require bootstrap-slider
+*/
+
+.alert {
+  border-radius: 0px !important;
+  font-size: 15px;
+}
+#campaign_address {
+  display: none;
+}
+.m-t-35 {
+  margin-top: 35px!important
+}
+
+.hover-desc {
+  display: none;
+  position: absolute;
+  top: 0;
+  background: rgba(102, 102, 102, 0.9);
+  padding: 25px;
+  color: #fff;
+  height: 255px;
+  width: 255px;
+}
+.slider.slider-horizontal {
+  width: 85% !important;
+}
+
+.custom-label.active {
+  background: #8bc34a !important;
+}
+.custom-label.pending {
+  background: #ffc107 !important;
+}
+.custom-label.rejected {
+  background: #ff5722 !important;
+}
+.custom-label.closed {
+  background: #673ab7 !important;
+}
+.custom-label {
+  font-size: 15px !important;
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  border-radius: 0 !important;
+  text-transform: uppercase
+}
+.faq-category {
+  font-size: 15px;
+  text-transform: capitalize;
+}

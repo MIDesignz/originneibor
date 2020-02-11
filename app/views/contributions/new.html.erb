@@ -1,0 +1,7 @@
+<%= content_for :title, "Make a Contribution" %>
+
+<%= simple_form_for @contribution, url: "/campaigns/#{@campaign.id}/contributions", method: :post do |f| %>
+  <%= f.input :donation_type, as: :select, label: "Contribution Type", collection: [['Volunteer Time (in hours)', 0]], include_blank: false %>
+  <%= f.input :donation_amount, label: "Amount" %>
+  <%= f.submit "Submit Donation", class: "btn btn-primary" %>
+<% end %>

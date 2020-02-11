@@ -1,0 +1,292 @@
+<div id="content" class="content">
+  <ol class="breadcrumb pull-right">
+    <li><a href="javascript:;">Home</a></li>
+    <li class="active">Dashboard</li>
+  </ol>
+  <h1 class="page-header">Dashboard</h1>
+  <div class="row">
+    <div class="col-md-3 col-sm-6">
+      <div class="widget widget-stats bg-green">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-gamepad fa-fw"></i></div>
+        <div class="stats-title">Active Campaigns</div>
+        <div class="stats-number"><%= Campaign.active_campaigns.count %></div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="widget widget-stats bg-blue">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-tags fa-fw"></i></div>
+        <div class="stats-title">Campaigns Awaiting Approval</div>
+        <div class="stats-number"><%= Campaign.pending_campaigns.count %></div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="widget widget-stats bg-purple">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-users fa-fw"></i></div>
+        <div class="stats-title">Total Users</div>
+        <div class="stats-number"><%= User.count %></div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+      <div class="widget widget-stats bg-black">
+        <div class="stats-icon stats-icon-lg"><i class="fa fa-dollar fa-fw"></i></div>
+        <div class="stats-title">Total Collections</div>
+        <div class="stats-number"><i class="fa fa-dollar fa-fw"></i>0</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-inverse" data-sortable-id="index-1">
+        <div class="panel-heading">
+          <h4 class="panel-title">Users with the most contributions <span class="pull-right label label-success">24 users</span></h4>
+        </div>
+        <ul class="registered-users-list clearfix">
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-5.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Savory Posh
+              <small>Algerian</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-3.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Ancient Caviar
+              <small>Korean</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-1.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Marble Lungs
+              <small>Indian</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-8.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Blank Bloke
+              <small>Japanese</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-2.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Hip Sculling
+              <small>Cuban</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-6.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Flat Moon
+              <small>Nepalese</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-4.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Packed Puffs
+              <small>Malaysian></small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-9.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Clay Hike
+              <small>Swedish</small>
+            </h4>
+          </li>
+        </ul>
+        <div class="panel-footer text-center">
+          <a href="javascript:;" class="text-inverse">View All</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-inverse" data-sortable-id="index-2">
+        <div class="panel-heading">
+          <h4 class="panel-title">Users with the most campaigns <span class="pull-right label label-success">24 users</span></h4>
+        </div>
+        <ul class="registered-users-list clearfix">
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-5.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Savory Posh
+              <small>Algerian</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-3.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Ancient Caviar
+              <small>Korean</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-1.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Marble Lungs
+              <small>Indian</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-8.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Blank Bloke
+              <small>Japanese</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-2.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Hip Sculling
+              <small>Cuban</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-6.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Flat Moon
+              <small>Nepalese</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-4.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Packed Puffs
+              <small>Malaysian></small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-9.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Clay Hike
+              <small>Swedish</small>
+            </h4>
+          </li>
+        </ul>
+        
+        <div class="panel-footer text-center">
+          <a href="javascript:;" class="text-inverse">View All</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-inverse" data-sortable-id="index-3">
+        <div class="panel-heading">
+          <h4 class="panel-title">Users with the most hours volunteered <span class="pull-right label label-success">24 users</span></h4>
+        </div>
+        <ul class="registered-users-list clearfix">
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-5.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Savory Posh
+              <small>Algerian</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-3.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Ancient Caviar
+              <small>Korean</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-1.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Marble Lungs
+              <small>Indian</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-8.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Blank Bloke
+              <small>Japanese</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-2.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Hip Sculling
+              <small>Cuban</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-6.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Flat Moon
+              <small>Nepalese</small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-4.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Packed Puffs
+              <small>Malaysian></small>
+            </h4>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <%= image_tag 'admin/user-9.jpg' %>
+            </a>
+            <h4 class="username text-ellipsis">
+              Clay Hike
+              <small>Swedish</small>
+            </h4>
+          </li>
+        </ul>
+        <div class="panel-footer text-center">
+          <a href="javascript:;" class="text-inverse">View All</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>United Neighbor</title>
+    <script src="https://use.fontawesome.com/dbec63c797.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700">
+    <%= display_meta_tags %>
+    <%= javascript_include_tag "jquery" %>
+    <%= stylesheet_link_tag "users/application" %>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="body-wrapper">
+    <div class="main-wrapper">
+      <%= render 'layouts/alerts' %>
+      <%= render 'shared/navbar' %>  
+      <%= yield %>
+      <div id="modal-container"></div>
+      <%#= render 'shared/footer' %>
+    </div>
+    <%= render 'layouts/modal' %>
+    <%= javascript_include_tag "users/application" %>
+  </body>
+</html>

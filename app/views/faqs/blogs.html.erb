@@ -1,0 +1,35 @@
+<section class="clearfix productsContent" style="margin-top: 20px;">
+  <div class="container">
+    <div class="row m-t-35">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @campaigns.length > 0 %>
+              <% @campaigns.each do |c| %>
+                <tr>
+                  <td>
+                    <%= link_to c.name, blog_path(c) %>
+                  </td>
+                  <td>
+                    <%= raw c.description.truncate(400) %>
+                  </td>
+                  <td>
+                    <%= "#{c.city} #{c.state} #{c.zipcode}" %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<%= render 'shared/users_footer' %>

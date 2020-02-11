@@ -1,0 +1,44 @@
+<div style="margin-top: 20px;">
+  <section class="">
+    <div class="container">
+        <%= link_to "Back to blogs", blogs_path, class: "btn btn-primary" %>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <div class="media">
+            <div class="media-left" style="margin-top: 20px; margin-bottom: 20px;">
+              <%= image_tag @campaign.avatar.url, style: "width: 100%;" %>
+            </div>
+          </div>
+        </div>
+        <% if @campaign.volunteers_required? %>
+          <%= render 'campaigns/map',margin_top: "margin-top: 20px;" %>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="media-body">
+            <h1><%= @campaign.name %></h1>
+            <p><%= raw(@campaign.description) %></p>
+            <div class="tabArea pull-center">
+              <div class="tab-content">
+                <div id="details" class="tab-pane active">
+                  <h3><%= @campaign.hours_donated %> Hours Volunteered.</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%= render 'contributions/contributions', contributions: @campaign.contributions, total_hours: "", title: "Contributions" %>
+</div>
+<%= render 'shared/users_footer' %>
+
+
+<style type="text/css">
+  .btn {
+    padding: 13px 35px;
+  }
+</style>

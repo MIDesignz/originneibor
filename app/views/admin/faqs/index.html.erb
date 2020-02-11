@@ -1,0 +1,55 @@
+<div id="content" class="content">
+  <ol class="breadcrumb pull-right">
+    <li><a href="javascript:;">Home</a></li>
+    <li class="active">FAQ</li>
+  </ol>
+
+  <h1 class="page-header">FAQ</h1>
+  <%= link_to "New FAQ", new_admin_faq_path, class: "btn btn-default" %>
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-md-12 ui-sortable">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">All FAQs</h4>
+        </div>
+        
+        <div class="panel-body">
+          <div id="data-table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Title</th>
+                      <th>Priority</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @faqs.each do |faq, index| %>
+                      <tr>
+                        <td><%= faq.faq_category.title %></td>
+                        <td><%= faq.title %></td>
+                        <td><%= faq.priority %></td>
+                        <td>
+                          <%= link_to "Edit", edit_admin_faq_path(faq) %> -
+                          <%= link_to "Destroy", admin_faq_path(faq), method: :delete, data: {confirm: "Are you sure?"} %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+  .table>thead>tr>th {
+    border-bottom: 1px solid #e2e7eb !important;
+  }
+</style>

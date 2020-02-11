@@ -1,0 +1,7 @@
+<% if @campaign.is_featured? %>
+  $("#featured_campaign_<%= @campaign.id %> > i").removeClass('fa fa-heart-o');
+  $("#featured_campaign_<%= @campaign.id %> > i").addClass('fa fa-heart');
+<% else %>
+  $("#featured_campaign_<%= @campaign.id %> > i").removeClass('fa fa-heart');
+  $("#featured_campaign_<%= @campaign.id %> > i").addClass('fa fa-heart-o');
+<% end %>

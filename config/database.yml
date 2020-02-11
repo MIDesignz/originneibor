@@ -1,0 +1,17 @@
+production:
+  adapter: postgresql
+  encoding: unicode
+  host: 127.0.0.1
+  database: unitedneighbor_development
+  pool: 5
+  username: postgres
+  password: ruby123 
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  host: 127.0.0.1
+  database: unitedneighbor_development
+  pool: 5
+  username: savan
+  password: savan0409

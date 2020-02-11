@@ -1,0 +1,57 @@
+<section class="clearfix productsContent" style="margin-top: 20px;">
+  <div class="container">
+    <div class="row">
+      <%= simple_form_for :search, url: "/campaigns/search", method: :get do |f| %>
+        <div class="col-md-4">
+          <%= f.input :distance, label: "Show campaigns within", as: :select, collection: { 0 => "All Locations", 5 => "5 miles", 10 => "10 miles", 20 => "20 miles" }.invert, include_blank: false, selected: @selected %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :zipcode, label: "Zipcode", input_html: { value: params[:search] && params[:search][:zipcode] } %>
+        </div>
+        <div class="col-md-4">
+          <%= f.input :campaign_organization, label: "Organization", as: :select, collection: { :"all" => "All", :"non_profit" => "Non Profit" }.invert, include_blank: false, selected: params[:search] && params[:search][:campaign_organization] %>
+        </div>
+        <div class="col-md-12">
+          <%= f.submit "Search", class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row m-t-35">
+      <div class="col-md-12">
+        <% if @warning.present? %>
+          <div class="alert alert-warning"><%= @warning %></div>
+        <% end %>
+
+        <% if @campaigns.length > 0 %>
+          <% @campaigns.each do |c| %>
+            <div class="col-md-3 col-sm-4 col-xs-12">
+              <% if controller_name == "campaigns" && action_name == "mine" %>
+                <span class="label custom-label label-default <%= c.closed_at.present? ? 'closed' : c.status %>">
+                  <%= c.closed_at.present? ? 'closed' : c.status %>
+                </span>
+              <% end %>
+
+              <div class="productBox">
+                <div class="productImage clearfix">
+                  <%= link_to campaign_path(c) do %>
+                    <%= image_tag c.avatar.url, style: "height: 255px;" %>
+                  <% end %>
+                </div>
+                <div class="hover-desc">
+                  <%= raw c.description.truncate(300) %>
+                </div>
+                <div class="productCaption clearfix">
+                  <%= link_to campaign_path(c) do %>
+                    <h5><%= c.name %></h5>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No campaigns nearby</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

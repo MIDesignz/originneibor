@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <br>
+    <br>
+    <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "btn btn-block btn-primary" %><br />
+      <% end -%>
+    <% end -%>
+
+    <div class="separator"><div class="text or">or</div></div>
+    <%= simple_form_for resource, url: session_path(resource_name) do |f| %>
+      <%= f.input :email, placeholder: "Email", autofocus: true %>
+      <%= f.input :password, placeholder: "Password" %>
+      <div class="row">
+      <% if devise_mapping.rememberable? %>
+        <div class="col-md-6">
+          <%= f.input :remember_me, label: "Remember Me", as: :boolean %>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= link_to "Forgot your password?", new_password_path(resource_name), class: "nav-link" %>
+          </div>
+        </div>
+      <% end %>
+      </div>
+      <% if @fail_attempts_count && @fail_attempts_count > 9 %>
+        <%= flash[:recaptcha_error] %>
+        <%= recaptcha_tags %>
+      <% end %>
+      <div class="row">
+        <div class="col-md-6">
+          <%= f.submit  "Sign In", class: "btn btn-primary btn-block" %>
+        </div>
+        <div class="col-md-6">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
+<style type="text/css">
+  .separator {
+    display: block;
+    margin: 32px auto 5px;
+    border-top: 1px solid #e9e9ec;
+    text-align: center;
+  }
+  .text.or {
+    position: relative;
+    bottom: 11px;
+    z-index: 2;
+    margin-top: 0px;
+    margin-right: 11px;
+    margin-left: 11px;
+    padding: 0px 8px;
+    background-color: #fff;
+  }
+  .text {
+    display: inline-block;
+    color: #79808b;
+    font-size: 16px;
+  }
+  .nav-link {
+    margin-top: 10px;
+    float: right;
+  }
+  h5 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+</style>

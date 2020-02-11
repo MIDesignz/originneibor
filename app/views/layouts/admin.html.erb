@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin | United Neighbor</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <%= display_meta_tags %>
+    <%= javascript_include_tag "jquery" %>
+    <%= stylesheet_link_tag "admin/application" %>
+  </head>
+  <body>
+    <div id="page-loader" class="fade in"><span class="spinner"></span></div>
+    <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+      <%= render 'shared/admin/header' %>
+      <%= render 'shared/admin/sidebar' %>
+      <%= yield %>
+    </div>
+    <%#= render 'shared/navbar' %>  
+    <%= javascript_include_tag "admin/application" %>
+  </body>
+</html>

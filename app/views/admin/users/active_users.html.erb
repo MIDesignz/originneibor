@@ -1,0 +1,89 @@
+<div id="content" class="content">
+  <ol class="breadcrumb pull-right">
+    <li><a href="javascript:;">Home</a></li>
+    <li class="active">User Management</li>
+  </ol>
+  <h1 class="page-header">User Management</h1>
+  <div id="options" class="m-b-10">
+    <a href="<%= admin_users_path %>" class="btn btn-default btn-xs active">
+      All Users
+    </a>
+    <a href="<%= active_users_admin_users_path %>" class="btn btn-default btn-xs">
+      Active Users
+    </a>
+    <a href="<%= banned_users_admin_users_path %>" class="btn btn-default btn-xs">
+      Banned Users
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-12 ui-sortable">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">All Users</h4>
+        </div>
+        
+        <div class="panel-body">
+          <div id="data-table_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @users.each do |user| %>
+                      <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                          <%= link_to "Edit", edit_admin_user_path(user) %> -
+                          <%= link_to "Destroy", admin_user_path(user), method: :delete, data: {confirm: "Are you sure?"} %> -
+                          <%= link_to "#{user.banned? ? 'Banned' : 'Active'}", mark_banned_admin_user_path(user) %>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+  
+  .table>thead>tr>th {
+    border-bottom: 1px solid #e2e7eb !important;
+  }
+</style>
+<!-- <script type="text/javascript">
+  $(function() {
+    return $('#users-table').dataTable({
+      ajax: $('#users-table').data('source'),
+      processing: true,
+      serverSide: true,
+      pagingType: "full_numbers"
+    });
+    $.extend($.fn.DataTable.defaults, {
+      searching: true,
+      ordering: true,
+      deferRender: true,
+      lengthMenu: [10, 25, 50, 100],
+      serverSide: true,
+      initComplete: function() {
+        return $('.filters input, .filters select', this).on('change', (function(_this) {
+          return function(e) {
+            var th;
+            th = $(e.target).closest("th");
+            return _this.api().column(th.index()).search($(e.target).val()).draw();
+          };
+        })(this));
+      }
+    });
+  });
+</script> -->

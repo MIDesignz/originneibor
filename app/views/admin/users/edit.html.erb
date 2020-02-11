@@ -1,0 +1,29 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">Edit User</h4>
+        </div>
+        <div class="panel-body">
+          <%= simple_form_for [:admin, @user] do |f| %>
+            <div class="row">
+              <div class="col-md-12">
+                <%= image_tag "#{@user.image}?type=normal" if !@user.image.blank? %>
+              </div>
+            </div>
+
+            <%= f.input :email, disabled: true %>
+            <%= f.input :name %>
+            <%= f.input :address, hint: "Your location" %>
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <%= f.submit "Update", class: "btn btn-primary btn-block" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

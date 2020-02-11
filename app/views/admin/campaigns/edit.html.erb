@@ -1,0 +1,41 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">Edit Campaign</h4>
+        </div>
+        <div class="panel-body">
+          <%= simple_form_for [:admin, @campaign], url: admin_campaign_path(@campaign), method: :put do |f| %>
+            <%= f.input :name %>
+            <%= f.input :description, as: :text %>
+            <%= f.input :volunteers_required, as: :boolean, label: "Is this a local event where people can volunteer their time?" %>
+            <div id="campaign_address">
+              <%= f.input :street_1 %>
+              <%= f.input :street_2, label: "Street 2 (Optional)" %>
+              <div class="row">
+                <div class="col-md-4">
+                  <%= f.input :city %>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input :state %>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input :zipcode %>
+                </div>
+              </div>
+            </div>
+
+            <%= f.input :nonprofit_organization, as: :boolean, label: "Is this nonprofit 501c organization?" %>
+            <%= f.input :avatar, label: "Upload Image", as: :file %>
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <%= f.submit "Update Campaign", class: "btn btn-primary btn-block" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

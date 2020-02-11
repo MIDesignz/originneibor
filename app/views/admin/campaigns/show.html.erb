@@ -1,0 +1,116 @@
+<div class="content">
+  <% if @campaign.closed_at.present? %>
+    <div class="note note-danger">This campaign closed <%= time_ago_in_words(@campaign.closed_at) %> ago.</div>
+  <% end %>
+  <strong>
+    Status
+  </strong>
+  <p class="image-caption <%= @campaign.closed_at.present? ? 'closed' : @campaign.status %> inner">
+    <% if @campaign.closed_at.present? %>
+      Closed
+    <% else %>
+      <%= @campaign.status.blank? ? 'No Status' : @campaign.status.capitalize %>
+    <% end %>
+  </p>
+  <strong>
+    Targeted Amount
+  </strong>
+  <p class="image-caption <%= @campaign.closed_at.present? ? 'closed' : @campaign.status %> inner">
+    $<%= @campaign.targeted_amount.blank? ? 0 : @campaign.targeted_amount %>
+  </p>
+  <div class="row">
+    <div class="col-md-12">
+      <% if !@campaign.closed_at.present? %>
+        <div class="panel panel-inverse">
+          <div class="panel-heading">
+            <h4 class="panel-title">Actions</h4>
+          </div>
+          <div class="panel-body">
+            <%= link_to "Edit Campaign", edit_admin_campaign_path(@campaign), class: "btn btn-white m-r-5 m-b-5" %>
+            <%= link_to "Remove Campaign", admin_campaign_path(@campaign), class: "btn btn-danger m-r-5 m-b-5", method: :delete %>
+            <%= link_to "Approve Campaign", approve_admin_campaign_path(@campaign), class: "btn btn-warning m-r-5 m-b-5" if !@campaign.active? %>
+            <%= link_to "Reject Campaign", reject_admin_campaign_path(@campaign), class: "btn btn-danger m-r-5 m-b-5" if !@campaign.rejected? %>
+          </div>
+        </div>
+      <% end %>
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h1 class="panel-title"><%= @campaign.name %></h1>
+        </div>
+        <div class="panel-body">
+          <%= raw(@campaign.description) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="media">
+        <div class="media-left" style="">
+          <%= image_tag @campaign.avatar.url, style: "width: 100%;" %>
+        </div>
+      </div>
+    </div>
+    <% if @campaign.volunteers_required? %>
+      <%= render 'campaigns/map',margin_top: "" %>
+    <% end %>
+  </div>
+
+  <div class="row m-t-15">
+    <div class="col-xs-12">
+      <div class="media-body">
+        <div class="tabArea pull-center">
+          <div class="tab-content">
+            <div id="details" class="tab-pane active">
+              <h3 class="m-t-0 m-b-0"><%= @campaign.hours_donated %> Hours Volunteered.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="tab-content">
+        <ul class="chats">
+          <% @campaign.contributions.order(created_at: :desc).limit(7).each do |c| %>
+          <li class="left">
+            <span class="date-time"><%= time_ago_in_words(c.created_at) %> ago</span>
+            <% if c.user %>
+            <a href="javascript:;" class="image"><img alt="" src="<%= c.user.gravatar_url(default: :mm) if c.user %>"></a>
+            <% end %>
+            <div class="message">
+              <span style="color:green;">
+                <strong>
+                  <%= c.contribution_text %>
+                </strong>
+              </span>
+            </div>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+  .singleProduct .media .media-body {
+    display: block;
+  }
+  .social-share-button .ssb-icon {
+    background-size: 30px 30px;
+    height: 30px;
+    width: 30px;
+  }
+  .chats .message {
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+  .chats .date-time {
+    margin-top: -5px;
+    font-weight: 600;
+  }
+</style>

@@ -1,0 +1,72 @@
+<div id="sidebar" class="sidebar">
+  <div data-scrollbar="true" data-height="100%">
+    <ul class="nav">
+      <li class="nav-profile">
+        <div class="image">
+          <a href="javascript:;">
+            <%= image_tag 'admin/user-13.jpg' %>
+          </a>
+        </div>
+        <div class="info">
+          Administrator
+        </div>
+      </li>
+    </ul>
+    <ul class="nav">
+      <li class="nav-header">Navigation</li>
+      <li>
+        <%= link_to admin_dashboard_path do %>
+          <%= fa_icon "laptop" %> <span>Dashboard</span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to admin_users_path do %>
+          <%= fa_icon "users" %> <span>User Management</span>
+        <% end %>
+      </li>
+      <li class="has-sub">
+        <a href="javascript:;">
+          <b class="caret pull-right"></b>
+          <%= fa_icon "gamepad" %>
+          <span>Campaign Management</span>
+        </a>
+        <ul class="sub-menu">
+          <li><a href="<%= admin_campaigns_path %>">All Campaigns</a></li>
+          <li><a href="<%= featured_campaigns_admin_campaigns_path %>">Featured Campaigns</a></li>
+        </ul>
+      </li>
+      <li>
+        <%= link_to admin_reports_path do %>
+          <%= fa_icon "bar-chart-o" %>
+          <span>Reports</span>
+        <% end %>
+      </li>
+      <li class="has-sub">
+        <a href="javascript:;">
+          <b class="caret pull-right"></b>
+          <%= fa_icon "cogs" %>
+          <span>Global settings</span>
+        </a>
+        <ul class="sub-menu">
+          <!-- <li><a href="<%= admin_smtp_settings_path %>">Email server settings</a></li> -->
+          <li><a href="<%= admin_payment_settings_path %>">WePay settings</a></li>
+          <li><a href="<%= admin_other_settings_path %>">Other</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <a href="javascript:;">
+          <b class="caret pull-right"></b>
+          <%= fa_icon "question" %>
+          <span>FAQs</span>
+        </a>
+        <ul class="sub-menu">
+          <!-- <li><a href="<%= admin_smtp_settings_path %>">Email server settings</a></li> -->
+          <li><a href="<%= admin_faq_categories_path %>">FAQ Categories</a></li>
+          <li><a href="<%= admin_faqs_path %>">FAQs</a></li>
+        </ul>
+      </li>
+      <!-- <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li> -->
+    </ul>
+  </div>
+</div>
+<div class="sidebar-bg"></div>

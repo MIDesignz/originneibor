@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <p style="margin-top: 20px;">
+      To accept payments through your campaigns, you must connect with your WePay account.
+    </p>
+
+    <% if current_user.has_connected_wepay? %>
+      <a href="javascript:;" class="btn btn-success" style="padding: 10px; margin-bottom: 20px;">
+        your WePay account is Connected
+      </a>
+    <% else %>
+      <a id="start_oauth2" href="#">Click here to create your WePay account</a><br><br>
+    <% end %>
+
+    <%= simple_form_for resource, url: registration_path(resource_name), method: :patch do |f| %>
+      <%= devise_error_messages! %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= image_tag "#{resource.image}?type=normal" if !resource.image.blank? %>
+          <%#= image_tag resource.avatar.url if !resource.avatar.blank? %>
+          <%#= f.input :avatar %>
+        </div>
+      </div>
+
+      <%= f.input :email %>
+      <%= f.input :address, hint: "Your location" %>
+      <%= f.input :mobile_number %>
+      
+      <%= f.input :password %>
+      <%= f.input :password_confirmation %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <%= f.submit "Update", class: "btn btn-primary btn-block" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script src="https://static.wepay.com/min/js/wepay.v2.js" type="text/javascript"></script>
+<!-- <script type="text/javascript" src="https://www.wepay.com/min/js/iframe.wepay.js"></script> -->
+<script type="text/javascript">
+$(document).on("ready page:load", function () {
+  WePay.set_endpoint("<%= ENV['WEPAY_ENV'] %>"); // stage or production
+  WePay.OAuth2.button_init(document.getElementById('start_oauth2'), {
+    "client_id": "<%= GlobalSetting.first.we_pay_client_id %>",
+    "scope": ["manage_accounts","collect_payments","view_user","send_money","preapprove_payments", "manage_subscriptions"],
+    "user_name": "<%= current_user.name %>",
+    "user_email": "<%= current_user.email %>",
+    "redirect_uri": "<%= ENV['WEPAY_REDIRECT_URL'] %>",
+    "state": "<%= current_user.id %>", // this is an optional parameter that lets you persist some state value through the flow
+    "callback":function(data) {
+      console.log(data);
+      // savanraval.ror@gmail.com
+      /** This callback gets fired after the user clicks "grant access" in the popup and the popup closes. The data object will include the code which you can pass to your server to make the /oauth2/token call **/
+      if (data.code.length !== 0) {
+        $.ajax({
+          url: "<%= ENV['WEPAY_REDIRECT_URL'] %>",
+          type: 'GET',
+          data: { code: data.code, state: data.state, wepay_message_type: data.wepay_message_type},
+        })
+        .done(function() {
+          console.log("success");
+          location.reload();
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+      } else {
+      }
+    }
+  });
+});
+
+// WePay.iframe_checkout("withdrawal_div", "https://stage.wepay.com/api/withdrawal/12345");
+
+</script>

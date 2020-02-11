@@ -1,0 +1,46 @@
+<section class="clearfix cartListWrapper" style="margin-top: 50px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="cartListInner">
+          <form action="#">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th><span class="pull-right"><%= total_hours %></span>
+                      <%= title %>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% contributions.order(created_at: :desc).limit(7).each do |c| %>
+                    <tr>
+                      <td class="col-xs-4">
+                        <div class="media">
+                          <div class="media-left media-middle">
+                            <img src="<%= c.user.gravatar_url(default: :mm) if c.user %>" alt="Contact" class="media-object img-circle img-thumbnail thumb48" />
+                          </div>
+                          <div class="media-body pt-sm">
+                            <div class="text-bold">
+                              <div class="text-sm text-muted pull-right">
+                                <%= c.contribution_text %> to
+                                <%= link_to c.campaign.name, campaign_path(c.campaign.id), style: "color:green;" if c.campaign %>,
+                                <%= time_ago_in_words(c.created_at) %> ago</div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<br>

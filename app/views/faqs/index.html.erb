@@ -1,0 +1,72 @@
+<div id="home" class="parallax top-content" data-stellar-background-ratio="0.3" style="background-image:url('https://s3-us-west-2.amazonaws.com/unitedneighbor-us-west-2/united_cover.jpg')">
+  <div class="inner-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1 top-description">
+          <h2 class="text-center">
+            frequently asked questions
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" id="faqs">
+  <div class="row">
+    <div class="col-md-12" style="margin-top: 25px;">
+      <% @faqs.each do |i, faq| %>
+        <% if !faq.blank? %>
+          <div class="inner-faqs">
+            <h3 class="faq-category">
+              <%= i.title %>
+            </h3>
+            <% faq.each do |f| %>
+              <div class="panel-group">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title" data-toggle="collapse" href="#<%= f.id %>">
+                      <a href="#"><%= f.title %></a>
+                    </h4>
+                  </div>
+                  <div id="<%= f.id %>" class="panel-collapse collapse">
+                    <div class="panel-body"><%= raw(f.description).html_safe %></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= render 'shared/users_footer' %>
+<style type="text/css">
+  .main-wrapper, body {
+    background-color: #f9f9f9;
+  }
+  #faqs a:hover, a:focus {
+    color: #000;
+  }
+  .inner-bg {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 150px;
+  }
+  #home {
+    height: 150px;
+  }
+  #faqs .panel-default > .panel-heading {
+    background-color: #fff;
+  }
+  #faqs .panel-group {
+    margin-bottom: 5px;
+  }
+  #faqs .inner-faqs {
+    margin-top: 25px;
+  }
+  #footer {
+    background-color: #f9f9f9;
+  }
+</style>

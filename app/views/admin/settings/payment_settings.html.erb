@@ -1,0 +1,25 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-inverse">
+        <div class="panel-heading">
+          <h4 class="panel-title">Edit User</h4>
+        </div>
+        <div class="panel-body">
+          <%= simple_form_for [:admin, @global_setting], url: admin_settings_update_payment_settings_path do |f| %>
+            <%= f.input :we_pay_client_id %>
+            <%= f.input :we_pay_client_secret %>
+            <%= f.input :commission_rate %>
+            <%= f.input :campaigns_require_approval %>
+
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3">
+                <%= f.submit "Update", class: "btn btn-primary btn-block" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
